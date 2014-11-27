@@ -1,0 +1,11 @@
+<div class="col-sm-6 col-md-3">
+	<div class="thumbnail">
+		<%= image_tag(@product.image_url, alt: 'product') %>
+	</div>
+	<div class="caption">
+		<p> Title: <%= @product.title %> </p>
+		<p> Descrition: <%= @product.description %> </p>
+		<p> Price: <%= @product.price %> </p>
+		<p> <%= link_to "add shop cart", '#' %>
+	</div>
+</div>
