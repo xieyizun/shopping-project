@@ -1,0 +1,24 @@
+<h1> Rigester </h1>
+<div class="center hero-unit">
+	<div class="row">
+		<div class="span6 offset3">
+			<%= form_for(@buyer) do |f| %>
+				<p> Name: <%= f.text_field :name %> </p>
+
+				<p> Age: <%= f.text_field :age %> </p>
+
+				<p> Sex: <%= f.text_field :sex %> </p>
+
+				<p> Email: <%= f.text_field :email %> </p>
+
+				<p> Favors: <%= f.text_field :favors %> </p>
+
+				<p> Password: <%= f.password_field :password %> </p>
+				
+				<p> Confirmation: <%= f.password_field :password_confirmation %> </p>
+				<%= f.submit "Creat my account", class: "btn btn-large btn-primary" %>
+				<%= render 'shared/error_messages', object: f.object %>
+			<% end %>
+		</div>
+	</div>
+</div>

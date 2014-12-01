@@ -1,33 +1,30 @@
 Rails.application.routes.draw do
 
-  get 'user/login'
 
-  get 'user/register'
+  resources :products do
+      member do
+        resources :items do
+          member do
+            resources :payments
+          end
+        end
+      end
+  end
 
-  get 'user/logout'
-
-  get 'user/shopcart'
-
-  get 'user/orders'
+  resources :buyers do
+      member do
+        resources :orders
+      end
+  end
+  resources :buyers, :products, :orders, :comments
+  resources :items
+  resources :sessions, only: [:new, :create, :destroy]
 
   root to: "static_pages#home"
-
-  get 'products/show/:id', to: 'products#show', as: :show
-
-  get 'products/display'
-
-  get 'products/issue'
-
-  get 'product/display'
-
-  get 'product/edit_new_product'
-
-  get 'users/register'
-
-  get 'users/login'
-
-  get 'users/profile'
-
+  
+  match '/signup', to: 'buyers#new', via: :get
+  match '/signin', to: 'sessions#new', via: :get
+  match 'signout', to: 'sessions#destroy', via: :delete
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
@@ -40,7 +37,7 @@ Rails.application.routes.draw do
   # Example of named route that can be invoked with purchase_url(id: product.id)
   #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase
 
-  # Example resource route (maps HTTP verbs to controller actions automatically):
+  # Example resource route (maps HTTP verbs to controler actions automatically):
   #   resources :products
 
   # Example resource route with options:

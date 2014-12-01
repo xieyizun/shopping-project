@@ -1,0 +1,14 @@
+<h1>Order <%= current_order.id %></h1>
+  <div class="row">
+	<%= render @items %>
+  </div>
+  <% if current_order.items.count > 0 %>
+  		<div class="row">
+  			<%= link_to "Pay Now", new_payment_path %>
+  		</div>
+  <% end %>
+
+  <div class="row">
+  	<%= link_to "Continue Shopping", root_url %>
+  </div>
+</br>

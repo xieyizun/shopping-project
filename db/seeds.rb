@@ -7,7 +7,7 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 Product.delete_all
 #...
-100.times {Product.create(:title => 'Artificial Intelligent', :description => 
+1000.times {Product.create(:title => 'Artificial Intelligent', :description => 
 		 %{ The learning material of Artificial Intelligent
 		 	this is a magic world and all amazing things },
 		 :image_url => 'sky.jpg',

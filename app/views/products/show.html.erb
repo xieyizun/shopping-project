@@ -6,6 +6,14 @@
 		<p> Title: <%= @product.title %> </p>
 		<p> Descrition: <%= @product.description %> </p>
 		<p> Price: <%= @product.price %> </p>
-		<p> <%= link_to "add shop cart", '#' %>
+		<% if sign_in? %>
+		    <% if create_order? %>
+				<p> add to shop cart: <%= link_to "add shop cart",new_item_path %>
+			<% else %>
+				<p> add to shop cart: <%= link_to "create a shop cart first", new_order_path %>
+			<% end %>
+		<% else %>
+			<p> add to shop cart: <%= link_to "sign in first", signin_path %> </p>
+		<% end %>
 	</div>
 </div>

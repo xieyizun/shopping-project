@@ -1,0 +1,7 @@
+<h1> payment </h1>
+	<div class="row">
+		<%= form_for(:payments, url:payments_path) do |f| %>
+			<p> Order: <%= current_order.id %> </p>
+			<%= f.submit "Create A Payment", class:"btn btn-large btn-primary" %>
+		<% end %>
+	</div>
