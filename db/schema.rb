@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141201130109) do
+ActiveRecord::Schema.define(version: 20141203130408) do
 
   create_table "buyers", force: true do |t|
     t.string   "name"
@@ -28,6 +28,7 @@ ActiveRecord::Schema.define(version: 20141201130109) do
   end
 
   add_index "buyers", ["email"], name: "index_buyers_on_email"
+  add_index "buyers", ["remember_token"], name: "index_buyers_on_remember_token"
 
   create_table "comments", force: true do |t|
     t.text     "content"
@@ -59,7 +60,11 @@ ActiveRecord::Schema.define(version: 20141201130109) do
     t.string   "remember_token2"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.decimal  "total_cost"
+    t.string   "status"
   end
+
+  add_index "orders", ["status"], name: "index_orders_on_status"
 
   create_table "products", force: true do |t|
     t.string   "title"
@@ -73,6 +78,12 @@ ActiveRecord::Schema.define(version: 20141201130109) do
   create_table "tests", force: true do |t|
     t.integer  "product_id"
     t.integer  "order_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "unpaid_orders", force: true do |t|
+    t.integer  "buyer_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

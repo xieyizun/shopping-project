@@ -2,28 +2,23 @@ class OrdersController < ApplicationController
   before_filter :sign_in_buyer
 
   def new
-    @order = Order.new
-    @order_number = current_buyer.orders.count
   end
 
   def create
-    @order = Order.new(buyer_id:current_buyer.id)
-    if @order.save
-      create_order @order
-      redirect_to @order
+    @unpaid_order = Order.new(buyer_id:current_buyer.id)
+    @unpaid_order.status = "UnPaid"
+    if @unpaid_order.save
+      create_order @unpaid_order
+      redirect_to @unpaid_order
     else
       redirect_to root_url
     end
   end
 
   def index
-    @order = current_order
-    @items = @order.items
   end
 
   def edit
-     @order = Order.new
-     @orders = current_buyer.orders
   end
 
   def update
@@ -31,11 +26,17 @@ class OrdersController < ApplicationController
   end
 
   def show
-    @order = current_order
-    @items = @order.items
+    if !current_order.nil?
+      @items = current_order.items
+    else
+      redirect_to current_buyer
+    end
   end
 
   def destroy
+    @order = current_buyer.orders.find_by_id(params[:id])
+    @order.destroy
+    redirect_to current_buyer
   end
 
   private

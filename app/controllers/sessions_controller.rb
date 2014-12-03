@@ -7,6 +7,9 @@ class SessionsController < ApplicationController
 		if buyer && buyer.authenticate(params[:session][:password])
 			flash[:success] = "Login successfully!"
 			sign_in buyer
+			if !current_buyer.unpaidorder.nil?
+				create_order current_buyer.unpaidorder
+			end
 			redirect_to buyer
 		else
 			flash[:error] = "Invaild email and password combination"
@@ -15,7 +18,12 @@ class SessionsController < ApplicationController
 	end
 
 	def destroy
+		if create_order?
+			current_buyer.unpaidorder = current_order
+			current_buyer.save
+		end
 		sign_out
+		delete_order
 		redirect_to root_url
 	end
 end

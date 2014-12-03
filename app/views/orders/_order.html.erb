@@ -1,4 +1,36 @@
-<div>
-	<p>Orders Id: <%= order.id %> </p>
-	<%= render order.items %>
-</div>
+<table class="table">
+	<caption>Order: <%= order.id %> | Total Cost: $ <%= order.total_cost %> | 
+		Status: <%= order.status %> | 
+		<% if order.status == "UnPaid" and order.items.count > 0 %>
+			<%= link_to "Pay Now", new_payment_path %>
+		<% end %>
+	</caption>
+	<thread>
+		<tr>
+			<th>Item ID</th>
+			<th>Product ID</th>
+			<th>Product Name</th>
+			<th>Product Price($)</th>
+			<% if order.status == "UnPaid" %>
+				<th>Operation</th>
+			<% end %>
+		</tr>
+	</thread>
+	<tbody>
+	  <% if order.status == "UnPaid" %>
+		   <%= render order.items %>
+	  <% else %>
+	  	<% order.items.each do |item| %>
+	  		<tr class="active">
+				<td> <%= item.id %> </td>
+				<td> <%= item.product_id %> </td>
+				<td> <%= item.product_name %> </td>
+				<td> <%= item.product_price %> </td>
+			</tr>
+	  	<% end %>
+	  <% end %>
+	</tbody>
+</table> 
+<%= button_to "Delete", order, method: :delete, data: {confirm: "You sure?"} %>
+
+</br>

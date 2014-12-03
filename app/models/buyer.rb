@@ -12,7 +12,8 @@ class Buyer < ActiveRecord::Base
 	validates :password, presence: true, length: {minimum: 6}
 	validates :password_confirmation, presence: true
 
-	has_many :orders
+	has_many :orders, dependent: :destroy
+	has_one :unpaidorder, dependent: :destroy, class_name: "Order"
 	
 	private 
 		def create_remember_token

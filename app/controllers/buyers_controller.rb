@@ -1,6 +1,7 @@
 class BuyersController < ApplicationController
   before_filter :sign_in_buyer, only: [:edit, :update, :show]
-  before_filter :correct_buyer
+  before_filter :correct_buyer, only: [:edit, :update, :show]
+  
   def new
     @buyer = Buyer.new
   end
@@ -25,7 +26,7 @@ class BuyersController < ApplicationController
   end
 
   def show 
-    @orders = current_buyer.orders
+    @paid_orders = current_buyer.orders
   end
 
   def index
