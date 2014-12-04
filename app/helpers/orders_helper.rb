@@ -21,6 +21,11 @@ module OrdersHelper
 		self.current_order = nil
 		cookies.delete(:remember_token2)
 	end
-
+	
+	def cal_totalcost
+        if create_order?
+          current_order.total_cost = current_order.items.sum(:product_price)
+        end
+    end
 	
 end

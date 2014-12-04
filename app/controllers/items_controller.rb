@@ -1,6 +1,5 @@
 class ItemsController < ApplicationController
   before_filter :sign_in_buyer
-
   def new
   end
 
@@ -19,11 +18,11 @@ class ItemsController < ApplicationController
   end
 
   def destroy
-    current_buyer.orders.each do |order|
-        if !order.items.find_by_id(params[:id]).nil?
-          order.items.find_by_id(params[:id]).destroy
-          redirect_to current_buyer
-        end
-    end
+      current_order.items.find_by_id(params[:id]).destroy
+      @total_cost = current_order.items.sum(:product_price) 
+      respond_to do |format|
+          format.html {redirect_to current_buyer}
+          format.js
+      end
   end
 end

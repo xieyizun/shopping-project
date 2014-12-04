@@ -26,7 +26,7 @@ class BuyersController < ApplicationController
   end
 
   def show 
-    @paid_orders = current_buyer.orders
+    @orders = current_buyer.orders
   end
 
   def index

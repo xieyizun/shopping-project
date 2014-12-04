@@ -1,0 +1,2 @@
+$("#show_items").html("<%= escape_javascript(render current_order.items) %>")
+$("#order_cost").html("<%= @total_cost %>")

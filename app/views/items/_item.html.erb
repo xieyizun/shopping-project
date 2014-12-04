@@ -3,5 +3,5 @@
 	<td> <%= item.product_id %> </td>
 	<td> <%= item.product_name %> </td>
 	<td> <%= item.product_price %> </td>
-	<td> <%= link_to "Delete", item, method: :delete, data: {confirm: "You sure?"} %> </td>
+	<td> <%= link_to "Delete", item, method: :delete, data: {confirm: "You sure?"}, remote: true %> </td>
 </tr>

@@ -1,11 +1,12 @@
-<%= render current_order %>
-<% if current_order.items.count > 0 %>
+<div id="show_orders"><%= render current_order %></div>
+<div id="paynow">
+	<% if current_order.items.count > 0 %>
   		<div class="row">
   			<%= link_to "Pay Now", new_payment_path %>
   		</div>
-<% end %>
-
-  <div class="row">
+	<% end %>
+</div>
+<div class="row">
   	<%= link_to "Continue Shopping", root_url %>
-  </div>
+</div>
 </br>

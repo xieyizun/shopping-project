@@ -1,6 +1,7 @@
 class OrdersController < ApplicationController
   before_filter :sign_in_buyer
-
+  before_filter :cal_totalcost, only:[:show]
+  
   def new
   end
 
@@ -36,7 +37,10 @@ class OrdersController < ApplicationController
   def destroy
     @order = current_buyer.orders.find_by_id(params[:id])
     @order.destroy
-    redirect_to current_buyer
+    respond_to do |format|
+      format.html {redirect_to current_buyer}
+      format.js
+    end
   end
 
   private
