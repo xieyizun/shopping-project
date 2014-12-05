@@ -6,48 +6,49 @@ class OrdersController < ApplicationController
   end
 
   def create
-    @unpaid_order = Order.new(buyer_id:current_buyer.id)
-    @unpaid_order.status = "UnPaid"
-    if @unpaid_order.save
-      create_order @unpaid_order
-      redirect_to @unpaid_order
+    if create_order?
+      flash[:warning] = "There is already existing an unpaid order!"
+      redirect_to current_order
     else
-      redirect_to root_url
+      @unpaid_order = Order.new(buyer_id:current_buyer.id)
+      @unpaid_order.status = "UnPaid"
+      if @unpaid_order.save
+        create_order @unpaid_order
+        redirect_to current_order
+      else
+        flash[:warning] = "Order creates failure!"
+        redirect_to current_buyer
+      end
     end
   end
 
   def index
+    redirect_to current_buyer
   end
 
   def edit
   end
 
-  def update
-    
+  def update  
   end
 
   def show
-    if !current_order.nil?
-      @items = current_order.items
+    @order = current_buyer.orders.find_by_id(params[:id])
+    if !@order.nil?
+        @items = @order.items
     else
-      redirect_to current_buyer
+        flash[:warning] = "This order is not existed or doesn't belong to you!"
+        redirect_to current_buyer
     end
   end
 
   def destroy
     @order = current_buyer.orders.find_by_id(params[:id])
-    @order.destroy
+    @order.delete
     respond_to do |format|
       format.html {redirect_to current_buyer}
       format.js
     end
   end
-
-  private
-    def correct_buyer
-      @buyer = Buyer.find_by_id(params[:buyer_id])
-      unless !@buyer.nil? and @buyer.id == current_buyer.id
-        redirect_to buyer_path(current_buyer)
-      end
-    end
+  
 end

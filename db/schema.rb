@@ -11,31 +11,33 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141203130408) do
+ActiveRecord::Schema.define(version: 20141205132138) do
 
   create_table "buyers", force: true do |t|
     t.string   "name"
-    t.integer  "age"
-    t.integer  "sex"
     t.string   "email"
-    t.string   "favors"
     t.string   "password"
     t.string   "password_confirmation"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "password_digest"
     t.string   "remember_token"
+    t.string   "gravator_url"
   end
 
   add_index "buyers", ["email"], name: "index_buyers_on_email"
   add_index "buyers", ["remember_token"], name: "index_buyers_on_remember_token"
 
   create_table "comments", force: true do |t|
-    t.text     "content"
     t.integer  "product_id"
+    t.integer  "buyer_id"
+    t.decimal  "score"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "item_id"
   end
+
+  add_index "comments", ["item_id"], name: "index_comments_on_item_id"
 
   create_table "items", force: true do |t|
     t.integer  "product_id"
@@ -44,6 +46,7 @@ ActiveRecord::Schema.define(version: 20141203130408) do
     t.datetime "updated_at"
     t.string   "product_name"
     t.decimal  "product_price"
+    t.boolean  "commentable"
   end
 
   create_table "line_items", force: true do |t|

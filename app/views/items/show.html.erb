@@ -1,0 +1,32 @@
+<p>Order Id: <%= @item.order_id %> </p>
+<p>Item Id: <%= @item.id %>
+<p>Product Title: <%= link_to "#{@product.title}", @product %></p>
+<p>Product Id: <%= @product.id %> </p>
+<% if @item.commentable == true %>
+ <%= form_for(@comment) do |f| %>
+  <p class="hidden">
+	<%= f.label :product_id, @product.id %>
+	<%= f.radio_button :product_id, @product.id %>
+  </p>
+  <p class="hidden">
+  	<%= f.label :buyer_id, current_buyer.id %>
+  	<%= f.radio_button :buyer_id, current_buyer.id %>
+  </p>
+  <p class="hidden">
+  	<%= f.label :item_id, @item.id %>
+  	<%= f.radio_button :item_id, @item.id %>
+  </p>
+	<%= f.label :score, 5 %>
+	<%= f.radio_button :score, 5 %>
+	<%= f.label :score, 4 %>
+	<%= f.radio_button :score, 4 %>
+	<%= f.label :score, 3 %>
+	<%= f.radio_button :score, 3 %>
+	<%= f.label :score, 2 %>
+	<%= f.radio_button :score, 2 %>
+	<%= f.label :score, 1 %>
+	<%= f.radio_button :score, 1 %>
+ </br>
+	<%= f.submit "Comment", class: "btn btn-primary btn-sm" %>
+ <% end %>
+<% end %>

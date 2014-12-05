@@ -7,12 +7,12 @@ class PaymentsController < ApplicationController
   end
   def create
   	if create_order?
-      current_order.status = "Paid"
       if current_order.update_attribute(:status, "Paid")
   		  delete_order
-  		  redirect_to buyer_path
+  		  redirect_to current_buyer
       else
-        redirect_to root_url
+        flash[:warning] = "Pay failure"
+        redirect_to current_order
       end
   	else
   		flash[:error] = "All orders have paid!"

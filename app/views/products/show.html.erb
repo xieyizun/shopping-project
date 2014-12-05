@@ -8,12 +8,27 @@
 		<p> Price: <%= @product.price %> </p>
 		<% if sign_in? %>
 		    <% if create_order? %>
-				<p> add to shop cart: <%= button_to "add shop cart",items_path %>
+				<p> add to shop cart: <%= button_to "add shop cart",items_path,class: "btn btn-primary btn-sm" %> </p>
 			<% else %>
-				<p> add to shop cart: <%= button_to "create a shop cart first", orders_path %>
+				<p> add to shop cart: <%= button_to "create a shop cart first", orders_path, class: "btn btn-primary btn-sm"%> </p>
 			<% end %>
 		<% else %>
-			<p> add to shop cart: <%= link_to "sign in first", signin_path %> </p>
+			<p> add to shop cart: <%= link_to "sign in first", signin_path, class: "btn btn-primary btn-sm"%> </p>
 		<% end %>
 	</div>
+</div>
+
+<div class="row">
+  <table class="table">
+	  <caption >Comment</caption>
+	  <thread>
+		<tr>
+			<th>Comment ID</th>
+			<th>Buyer ID</th>
+			<th>Score</th>
+	  </thread>
+	  <tbody id="show_comments">
+		   <%= render @comments %>
+	  </tbody>
+  </table> 
 </div>

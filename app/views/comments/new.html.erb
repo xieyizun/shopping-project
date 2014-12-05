@@ -1,2 +1,5 @@
-<h1>Comments#new</h1>
-<p>Find me in app/views/comments/new.html.erb</p>
+<%= form_for(@comment) do |f| %>
+	<%= f.label :score %>
+	<%= f.text_field :score %>
+	<%= f.submit "Comment", class: "btn btn-primary btn-sm" %>
+<% end %>

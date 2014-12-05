@@ -6,9 +6,9 @@ class ItemsController < ApplicationController
   def create
     if create_order?
       @product = Product.find_by_id(params[:id])
-      @item = Item.new(product_id:params[:id], order_id:current_order.id, product_name:@product.title, product_price:@product.price)
+      @item = Item.new(product_id:params[:id], order_id:current_order.id, product_name:@product.title, product_price:@product.price, commentable:true)
       if @item.save
-        current_order.items.build(order_id:current_order.id, product_id:params[:id], product_name:@product.title, product_price:@product.price)
+        current_order.items.push @item
         flash[:success] = "add #{@item.product_name}to shop cart successfully!"
         redirect_to current_order
       else
@@ -24,5 +24,11 @@ class ItemsController < ApplicationController
           format.html {redirect_to current_buyer}
           format.js
       end
+  end
+
+  def show
+    @item = Item.find_by_id(params[:id])
+    @product = Product.find_by_id(@item.product_id)
+    @comment = Comment.new(product_id:@product.id, buyer_id:current_buyer.id, item_id:params[:id])
   end
 end

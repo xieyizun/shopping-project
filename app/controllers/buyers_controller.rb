@@ -13,7 +13,7 @@ class BuyersController < ApplicationController
     if @buyer.save
       flash[:success] = "register successfully!"
       sign_in @buyer
-      redirect_to root_url
+      redirect_to current_buyer
     else
       render new_buyer_path
     end
@@ -23,6 +23,14 @@ class BuyersController < ApplicationController
   end
 
   def update
+      if @buyer.update_attributes(params[:buyer])
+        flash[:success] = "Udate Your Profile Successfully!"
+        sign_in @buyer
+        redirect_to current_buyer
+      else
+        flash[:warning] = "Update Failure!"
+        redirect_to edit_buyer_path
+      end
   end
 
   def show 
@@ -34,16 +42,13 @@ class BuyersController < ApplicationController
 
   def destroy
   end
-  
-  def pay
-    
-  end
 
   private
     def correct_buyer
       @buyer = Buyer.find_by_id(params[:id])
       unless !@buyer.nil? and @buyer.id == current_buyer.id
-        redirect_to buyer_path(current_buyer)
+        flash[:warning] = "You have no right to view other buyer's profile!"
+        redirect_to current_buyer
       end
     end
 end

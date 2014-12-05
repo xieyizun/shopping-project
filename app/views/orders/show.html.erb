@@ -1,12 +1,57 @@
-<div id="show_orders"><%= render current_order %></div>
-<div id="paynow">
-	<% if current_order.items.count > 0 %>
-  		<div class="row">
-  			<%= link_to "Pay Now", new_payment_path %>
-  		</div>
+<table  class="table">
+  <caption >Order: <%= @order.id %> | Total Cost: $ <span id="order_cost"> <%= @order.total_cost %> </span>| 
+    Status: <%= @order.status %> | 
+    <% if @order.status == "UnPaid"%>
+      <span id="paynow"> 
+        <% if @order.items.count > 0 %>
+          <%= link_to "Pay Now", new_payment_path %>
+        <% end %>
+      </span>
+    <% end %>
+  </caption>
+  <thread>
+    <tr>
+      <th>Item ID</th>
+      <th>Product ID</th>
+      <th>Product Name</th>
+      <th>Product Price($)</th>
+      <th>Operation</th>
+    </tr>
+  </thread>
+  <tbody id="show_items">
+    <% if @order.status == "UnPaid" %>
+       <%= render @order.items %>
+    <% else %>
+      <% @order.items.each do |item| %>
+        <tr class="active">
+        <td> <%= item.id %> </td>
+        <td> <%= item.product_id %> </td>
+        <td> <%= item.product_name %> </td>
+        <td> <%= item.product_price %> </td>
+        <% if item.commentable == true %>
+          <td> <%= link_to "comment", item %> </td>
+        <% else %>
+          <td> <%= link_to "item detail", item %> </td>
+        <% end %>
+      </tr>
+      <% end %>
+    <% end %>
+  </tbody>
+</table> 
+
+<div>
+	<% if @order.status == 'UnPaid' %>
+		<% if @order.items.count > 0 %>
+  			<div id="paynow" class="row">
+  				<%= link_to "Pay Now", new_payment_path %>
+  			</div>
+  			<div class="row">
+  				<%= link_to "Continue Shopping", root_url %>
+  			</div>
+  		<% else %>
+  			<div id="paynow" class="row">
+  				<%= link_to "Continue Shopping", root_url %>
+  			</div>
+  		<% end %>
 	<% end %>
 </div>
-<div class="row">
-  	<%= link_to "Continue Shopping", root_url %>
-</div>
-</br>

@@ -1,9 +1,8 @@
 <div class="row">
+	<p> Buyer-ID: <%= @buyer.id %> </p>
 	<p> Name: <%= @buyer.name %> </p>
-	<p> Sex: <%= @buyer.sex %> </p>
-	<p> Age: <%= @buyer.age %> </p>
-	<p> Favors: <%= @buyer.favors %> </p>
 	<p> Email: <%= @buyer.email %> </p>
+	<%= link_to "Edit My Profile", edit_buyer_path %>
 </div>
 <div id="show_orders" class="row">
 	<%= render @orders %>

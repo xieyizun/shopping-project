@@ -1,5 +1,5 @@
 class Buyer < ActiveRecord::Base
-	attr_accessible :name, :email, :password, :password_confirmation, :favors, :age, :sex
+	attr_accessible :name, :email, :password, :password_confirmation
 	has_secure_password
 
 	before_save { |user| user.email = email.downcase }
@@ -13,7 +13,7 @@ class Buyer < ActiveRecord::Base
 	validates :password_confirmation, presence: true
 
 	has_many :orders, dependent: :destroy
-	has_one :unpaidorder, dependent: :destroy, class_name: "Order"
+	has_many :comments, dependent: :destroy
 	
 	private 
 		def create_remember_token

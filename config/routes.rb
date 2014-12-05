@@ -1,23 +1,16 @@
 Rails.application.routes.draw do
-
-
-  resources :products do
+  resources :orders do
       member do
-        resources :items do
-          member do
-            resources :payments
-          end
-        end
+        resources :payments
       end
   end
-
-  resources :buyers do
+  resources :products do
       member do
-        resources :orders
+        resources :items, only:[:create]
       end
   end
   resources :buyers, :products, :orders, :comments
-  resources :items
+  resources :items, :comments
   resources :sessions, only: [:new, :create, :destroy]
 
   root to: "static_pages#home"

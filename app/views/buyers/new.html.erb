@@ -1,60 +1,18 @@
-<div>
-			<%= form_for(@buyer) do |f| %>
-				<p>
-					<td>Name</td>
-				    <td><%= f.text_field :name %> </td>
-				</p>
-				<p>    	
-				    <td>Age</td>
-				    <td><%= f.text_field :age %> </td>
-				</p>
-				<p>    	
-				    <td>Gender</td>
-				    <td>
-				    	<div class="btn-group">
-   							<button type="button" class="btn btn-primary dropdown-toggle btn-sm" data-toggle="dropdown">
-      								gender <span class="caret"></span>
-   							</button>
-   							<ul class="dropdown-menu" role="menu">
-      							<li><a href="#">male</a></li>
-      							<li><a href="#">female</a></li>
-   							</ul>
-						</div>	
-						<%= f.text_field :sex %> 			    		
-				    </td>
-				</p>
-				<p>    
-				    <td>Email</td>
-				    <td><%= f.text_field :email %> </td>
-				</p>
-				<p> 
-				    <td>Favors</td>
-				    <td>
-				    	<div class="btn-group">
-   							<button type="button" class="btn btn-primary dropdown-toggle btn-sm" data-toggle="dropdown">
-      								Favors <span class="caret"></span>
-   							</button>
-   							<ul class="dropdown-menu" role="menu">
-      							<li><a href="#">sweet</a></li>
-      							<li><a href="#">acid</a></li>
-      							<li><a href="#">peppery</a></li>
-      							<li><a href="#">others</a></li>
-   							</ul>
-						</div>
-						<%= f.text_field :favors %> 
-					<td>
-				</p>
-				<p>  
-					<td>Password</td>
-				    <td><%= f.password_field :password %> </td>
-				</p>
-				<p>    
-					<td>Password Confirmation</td>
-				    <td><%= f.password_field :password_confirmation %> </td>
-				</p>
-				<p>   
-					<td> <%= f.submit "Creat my account", class: "btn btn-large btn-primary" %> </td>
-				</p>	
+<h1>Register An Account</h1>
+<div class="center">
+	<%= form_for(@buyer) do |f| %>
+					<p>Name</p>
+				    <%= f.text_field :name %>
+				    <p>Email</p>
+				    <%= f.text_field :email %>
+					<p>Password</p>
+				    <%= f.password_field :password %> 
+					<p>Password Confirmation</p>
+				    <%= f.password_field :password_confirmation %> 
+				</br>
+				</br>
+					<p> <%= f.submit "Creat my account", class: "btn btn-large btn-primary" %>
+					</p>
 				<%= render 'shared/error_messages', object: f.object %>
-			<% end %>
+	<% end %>
 </div>
