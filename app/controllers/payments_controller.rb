@@ -5,9 +5,11 @@ class PaymentsController < ApplicationController
 
   def new
   end
+
   def create
   	if create_order?
       if current_order.update_attribute(:status, "Paid")
+        flash[:success] = "Order #{current_order.id} is paid successfully!"
   		  delete_order
   		  redirect_to current_buyer
       else

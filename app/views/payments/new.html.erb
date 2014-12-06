@@ -1,9 +1,8 @@
 <h1> Payment </h1>
 <div class="row">
-	<% if create_order? %>
-		<%= form_for(:payments, url:payments_path) do |f| %>
+	<% if create_order? %>		
 			<table class="table">
-				<caption>Order: <%= current_order.id %> | Total Cost: $ <%= current_order.total_cost %> | 
+				<caption>Order: <%= current_order.id %> | Total Cost: $ <span id="order_cost"> <%= current_order.total_cost %></span> | 
 					Status: <%= current_order.status %>
 				</caption>
 				<thread>
@@ -21,7 +20,8 @@
 					<%= render current_order.items %>
 				</tbody>
 			</table> 
-			<%= f.submit "Create A Payment", class:"btn btn-large btn-primary" %>
-		<% end %>
+			<%= form_for(:payments, url:payments_path) do |f| %>
+				<%= f.submit "Create A Payment", class:"btn btn-large btn-primary" %>
+			<% end %>
 	<% end %>
 </div>

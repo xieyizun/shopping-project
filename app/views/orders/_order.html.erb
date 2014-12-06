@@ -1,6 +1,9 @@
 <table  class="table">
-	<caption >Order: <%= order.id %> | Total Cost: $ <span id="order_cost"> <%= order.total_cost %> </span>| 
-		Status: <%= order.status %> | 
+	<caption >Order: <%= order.id %>
+		<%if !order.total_cost.nil? %>
+			| Total Cost: $ <span id="order_cost"> <%= order.total_cost %> </span>
+		<% end %>
+	   | Status: <%= order.status %> | 
 		<% if order.status == "UnPaid"%>
 			<span id="paynow"> 
 				<% if order.items.count > 0 %>

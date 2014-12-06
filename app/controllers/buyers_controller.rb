@@ -33,7 +33,7 @@ class BuyersController < ApplicationController
       end
   end
 
-  def show 
+  def show
     @orders = current_buyer.orders
   end
 

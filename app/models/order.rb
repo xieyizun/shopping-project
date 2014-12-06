@@ -1,5 +1,5 @@
 class Order < ActiveRecord::Base
-	attr_accessible :buyer_id, :status
+	attr_accessible :buyer_id, :status, :total_cost
 	belongs_to :buyer
 	has_many :items, dependent: :destroy
 

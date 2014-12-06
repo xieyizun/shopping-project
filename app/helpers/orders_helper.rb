@@ -24,7 +24,7 @@ module OrdersHelper
 	
 	def cal_totalcost
         if create_order?
-          current_order.total_cost = current_order.items.sum(:product_price)
+          self.current_order.total_cost = self.current_order.items.sum(:product_price)
         end
     end
 	
