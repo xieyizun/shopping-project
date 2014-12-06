@@ -1,2 +1,2 @@
-<h1>Comments#index</h1>
-<p>Find me in app/views/comments/index.html.erb</p>
+<h1> Export Comments to excel </h1>
+<%= link_to "Export Comments To Excel", comments_path(:format => 'xls'), class: "btn btn-primary btn-sm", data: {confirm: "Are you sure?"} %>

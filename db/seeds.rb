@@ -5,12 +5,5 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
-Product.delete_all
 #...
-1000.times {Product.create(:title => 'Artificial Intelligent', :description => 
-		 %{ The learning material of Artificial Intelligent
-		 	this is a magic world and all amazing things },
-		 :image_url => 'sky.jpg',
-		 :price => 49.50)
-		}
-#...
+200.times {Comment.create(:score => 4.0, :buyer_id => 9, :product_id => 1944, :item_id => 296)}

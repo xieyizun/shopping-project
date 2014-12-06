@@ -34,7 +34,7 @@ class BuyersController < ApplicationController
   end
 
   def show
-    @orders = current_buyer.orders
+    @orders = current_buyer.orders.paginate(page: params[:page])
   end
 
   def index

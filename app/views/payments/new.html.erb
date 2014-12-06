@@ -21,7 +21,7 @@
 				</tbody>
 			</table> 
 			<%= form_for(:payments, url:payments_path) do |f| %>
-				<%= f.submit "Create A Payment", class:"btn btn-large btn-primary" %>
+				<%= f.submit "Create A Payment", class:"btn btn-large btn-primary",data: {confirm: "Are you sure?"} %>
 			<% end %>
 	<% end %>
 </div>
