@@ -3,20 +3,25 @@ class BuyersController < ApplicationController
   before_filter :correct_buyer, only: [:edit, :update, :show]
   
   def new
-    @buyer = Buyer.new
+    if sign_in?
+      flash[:warning] = "You have already sign in!"
+      redirect_to current_buyer
+    else
+      @buyer = Buyer.new
+    end
   end
 
   def create
-    params.permit!
-    @buyer = Buyer.new(params[:buyer])
+      params.permit!
+      @buyer = Buyer.new(params[:buyer])
 
-    if @buyer.save
-      flash[:success] = "register successfully!"
-      sign_in @buyer
-      redirect_to current_buyer
-    else
-      render new_buyer_path
-    end
+      if @buyer.save
+        flash[:success] = "register successfully!"
+        sign_in @buyer
+        redirect_to current_buyer
+      else
+        render new_buyer_path
+      end
   end
 
   def edit

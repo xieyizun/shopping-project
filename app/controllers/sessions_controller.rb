@@ -3,6 +3,10 @@ class SessionsController < ApplicationController
 	end
 
 	def create
+	  if sign_in?
+			flash[:warning] = "You have already sign in!"
+			redirect_to current_buyer
+	  else
 		buyer = Buyer.find_by_email(params[:session][:email].downcase)
 		if buyer && buyer.authenticate(params[:session][:password])
 			flash[:success] = "Login successfully!"
@@ -11,11 +15,12 @@ class SessionsController < ApplicationController
 			if !@unpaid_order.nil?	
 				create_order @unpaid_order
 			end
-			redirect_to buyer
+			redirect_back_or_to current_buyer
 		else
 			flash[:error] = "Invaild email and password combination"
 			render new_session_path
 		end
+	  end
 	end
 
 	def destroy

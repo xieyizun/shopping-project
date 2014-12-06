@@ -14,7 +14,7 @@ class OrdersController < ApplicationController
       @unpaid_order.status = "UnPaid"                      
       if @unpaid_order.save
         create_order @unpaid_order
-        redirect_to current_order
+        redirect_back_or_to current_order
       else
         flash[:warning] = "Order creates failure!"
         redirect_to current_buyer

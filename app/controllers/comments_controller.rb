@@ -8,7 +8,7 @@ class CommentsController < ApplicationController
       format.xls {
           send_data(xls_content_for(@comments),
                     :type => "text/excel; charset=utf-8;header=present",
-                    :filename => "Report_Users_#{Time.now.strftime("%Y%m%d")}.xls")
+                    :filename => "Comments_#{Time.now.strftime("%Y%m%d")}.xls")
       }
       format.html
     end

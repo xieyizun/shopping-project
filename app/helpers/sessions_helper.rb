@@ -26,6 +26,4 @@ module SessionsHelper
 			redirect_to signin_path, notice: "please sign in first!"
 		end
 	end
-
-
 end

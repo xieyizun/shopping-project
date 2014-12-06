@@ -6,15 +6,17 @@
 		<p> Title: <%= @product.title %> </p>
 		<p> Descrition: <%= @product.description %> </p>
 		<p> Price: <%= @product.price %> </p>
+		<p id="buy">
 		<% if sign_in? %>
 		    <% if create_order? %>
-				<p> add to shop cart: <%= button_to "add shop cart",items_path,class: "btn btn-primary btn-sm" %> </p>
+				<p id="item"> add to shop cart: <%= button_to "add shop cart",items_path,class: "btn btn-primary btn-sm" %> </p>
 			<% else %>
-				<p> add to shop cart: <%= button_to "create a shop cart first", orders_path, class: "btn btn-primary btn-sm"%> </p>
+				<p id="order"> add to shop cart: <%= button_to "create a shop cart first", orders_path, class: "btn btn-primary btn-sm"%> </p>
 			<% end %>
 		<% else %>
-			<p> add to shop cart: <%= link_to "sign in first", signin_path, class: "btn btn-primary btn-sm"%> </p>
+			<p id="buyer"> add to shop cart: <%= link_to "sign in first", signin_path, class: "btn btn-primary btn-sm"%> </p>
 		<% end %>
+	    </p>
 	</div>
 </div>
 
