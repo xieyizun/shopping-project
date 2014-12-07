@@ -2,7 +2,7 @@
 <p>Item Id: <%= @item.id %>
 <p>Product Title: <%= link_to "#{@product.title}", @product %></p>
 <p>Product Id: <%= @product.id %> </p>
-<% if @item.commentable == true %>
+<% if @item.commentable == true and (current_order.nil? or current_order.id != @item.order_id) %>
  <%= form_for(@comment) do |f| %>
   <p class="hidden">
 	<%= f.label :product_id, @product.id %>

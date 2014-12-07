@@ -27,7 +27,7 @@
 	  <% else %>
 	  	<% order.items.each do |item| %>
 	  		<tr class="active">
-				<td> <%= item.id %> </td>
+				<td> <%= link_to "#{item.id}", item %> </td>
 				<td> <%= item.product_id %> </td>
 				<td> <%= item.product_name %> </td>
 				<td> <%= item.product_price %> </td>
